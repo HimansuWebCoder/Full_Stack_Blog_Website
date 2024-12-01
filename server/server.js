@@ -1,6 +1,7 @@
 const express = require("express");
 const session = require('express-session');
 const cors = require("cors");
+const path = require("path");
 const bodyParser = require("body-parser");
 const pg = require('pg');
 const knex = require('knex');
@@ -9,49 +10,59 @@ require('dotenv').config()
 
 const PORT = process.env.PORT || 8000;
 
+// const config = {
+//   host: process.env.DB_HOST,
+//   port: process.env.DB_PORT,
+//   user: process.env.DB_USER,
+//   password: process.env.DB_PASSWORD,
+//   database: process.env.DB_NAME,
+//   ssl: { rejectUnauthorized: false }, 
+// }
+
 const config = {
-  host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
+  host: process.env.PGHOST,
+  user: process.env.PGUSER,
+  port: process.env.PGPORT,
+  database: process.env.PGDATABASE,
+  password: process.env.PGPASSWORD,
+  ssl: { rejectUnauthorized: true }, // Required for Azure
 }
 
 // DATABASE Config
 const db = knex({
   client: 'pg',
-  connection: {
-    host:config.host,
-    port:config.port,
-        user: config.user,
-        password: config.password,
-        database: config.database,
-  }
+  connection: config,
 })
 
 // Session Middleware for development only
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: false,
-  cookie: {secure: false, maxAge: 24 * 60 * 60 * 1000}
-}))
-
-// Session Middleware for production only
-// app.test("trust proxy", 1);
 // app.use(session({
 //   secret: process.env.SESSION_SECRET,
 //   resave: false,
-//   saveUninitialized: true,
-//   cookie: {secure: true, maxAge: 24 * 60 * 60 * 1000}
+//   saveUninitialized: false,
+//   cookie: {secure: false, maxAge: 24 * 60 * 60 * 1000}
 // }))
+
+// Session Middleware for production only
+app.test("trust proxy", 1);
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true,
+  cookie: {secure: true, maxAge: 24 * 60 * 60 * 1000}
+}))
 
 // Other Middlewares
 app.use(express.json());
 app.use(cors({
-	origin: 'http://localhost:3000',
+	origin: ['http://localhost:3000', 'myblog-c3hkf4cgcee6bga7.israelcentral-01.azurewebsites.net'],
 	credentials: true,
 }));
+
+app.get("/*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../client/public/index.html"))
+})
+
+app.use(express.static(path.join(__dirname, '../client/build')));
 
 // Check user is logged-in or not
 function isAuthenticated(req, res, next) {

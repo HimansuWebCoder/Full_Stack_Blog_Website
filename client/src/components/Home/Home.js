@@ -43,7 +43,7 @@ function Home() {
                   </div>
         		))}
         </div>
-        	<Outlet />
+        <Outlet />
         </div>
 		)
 }

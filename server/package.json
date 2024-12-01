@@ -4,7 +4,8 @@
   "main": "server.js",
   "scripts": {
     "test": "jest",
-    "start": "nodemon server.js"
+    "watch": "nodemon server.js",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
