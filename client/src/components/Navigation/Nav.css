@@ -1,0 +1,33 @@
+/*Navbar container styling*/
+.nav-container {
+  max-width: 100%;
+  height: 40px;
+  background-color: #31363F;
+  padding:5px;
+  display: flex;
+  justify-content: flex-end;
+  border-bottom: 1px solid white;
+}
+
+/*Navigation links styling*/
+.nav-links {
+  text-decoration: none;
+  margin: 2px;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  background-color: #222831;
+  padding: 3px;
+  color: white;
+}
+
+/*Blog creation icon styling*/
+.create-blog-icon {
+  max-width:25px;
+  height: 20px;
+}
+
+
+.nav-links:active {
+  color: blue;
+  background-color: white;
+}
