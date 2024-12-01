@@ -7,7 +7,7 @@ function Nav() {
 	        <Link className="nav-links" to="/home">Home</Link>
 	        <Link className="nav-links" to="/home/create-post">
 	          Create Post 
-	          <img className="create-blog-icon" src="/assets/images/edit.png" />
+	          <img className="create-blog-icon" src="/assets/images/edit.png" alt="edit.png" />
 	        </Link>
         </nav>
 		)

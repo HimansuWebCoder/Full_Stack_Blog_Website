@@ -1,4 +1,4 @@
-import { Outlet, useNavigate, useLocation, Link } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import Nav from '../Navigation/Nav';
 import"./Home.css";
