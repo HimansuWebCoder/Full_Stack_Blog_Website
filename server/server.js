@@ -55,7 +55,7 @@ app.use(cors({
 
 // Check user is logged-in or not
 function isAuthenticated(req, res, next) {
-	console.log(req.session.email)
+	// console.log(req.session.email)
     if (process.env.NODE_ENV === "test") {
         next()
     } else if (req.session.email) {
