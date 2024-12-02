@@ -1,0 +1,53 @@
+name: blog frontend CI/CD
+
+on:
+ push:
+  branches: ["main"]
+   - paths: "server/**"
+   - ".github/workflow/backend-appservice.yml"
+  workflow_dispatch:
+
+env: 
+  NODE_VERSION: '18.X'
+permissions:
+  contents: read
+  id-token: write # for azure login
+
+jobs: 
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    environment: 
+      name: Production
+      url: ${{steps.deploy-to-webapp.outputs.webapp-url}}
+    defaults:
+      run:
+        working-directory: ./server
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{env.NODE_VERSION}}
+        cache: 'npm'
+        cache-dependency-path: ./server/package-lock.json
+
+    - name: npm install, build, and test 
+      run: 
+        npm install
+
+    - name: Azure CLI Login 
+      uses: azure/login@v2
+      with: 
+        client-id: ${{secrets.AZURE_CLIENT_ID}}
+        tenant-id: ${{secrets.AZURE_TENANT_ID}}
+        subscription-id: ${{secrets.AZURE_SUBSCRIPTION_ID}}
+
+    - name: 'Deploy to Azure WebApp'
+      id: deploy-to-webapp
+      uses: azure/webapps-deploy@v2 
+      with:
+        app-name: myblog
+        package: ./server 
+
+
