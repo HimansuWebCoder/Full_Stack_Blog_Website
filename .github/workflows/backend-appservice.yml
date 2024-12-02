@@ -14,7 +14,7 @@ env:
 
 permissions:
   contents: read
-  id-token: write # Required for Azure login
+  id-token: write # Needed for Azure login
 
 jobs:
   build_and_deploy:
