@@ -34,7 +34,7 @@
 
 /*Signup form input box styling*/
 .signup-input-box {
-  max-width:300px;
+  width:90%;
   height: 35px;
   font-size: 1.3rem;
   margin: auto;
