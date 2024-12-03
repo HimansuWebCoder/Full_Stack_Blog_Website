@@ -35,21 +35,21 @@ const db = knex({
 })
 
 // Session Middleware for development only
-// app.use(session({
-//   secret: process.env.SESSION_SECRET,
-//   resave: false,
-//   saveUninitialized: false,
-//   cookie: {secure: false, maxAge: 24 * 60 * 60 * 1000}
-// }))
-
-// Session Middleware for production only
-app.test("trust proxy", 1);
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
-  saveUninitialized: true,
-  cookie: {secure: true, maxAge: 24 * 60 * 60 * 1000}
+  saveUninitialized: false,
+  cookie: {secure: false, maxAge: 24 * 60 * 60 * 1000}
 }))
+
+// Session Middleware for production only
+// app.test("trust proxy", 1);
+// app.use(session({
+//   secret: process.env.SESSION_SECRET,
+//   resave: false,
+//   saveUninitialized: true,
+//   cookie: {secure: true, maxAge: 24 * 60 * 60 * 1000}
+// }))
 
 // Other Middlewares
 app.use(express.json());
@@ -58,11 +58,11 @@ app.use(cors({
 	credentials: true,
 }));
 
-app.use(express.static(path.join(__dirname, '../client/build')));
+// app.use(express.static(path.join(__dirname, '../client/build')));
 
-app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/build/index.html"));
-});
+// app.get("/*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "../client/build/index.html"));
+// });
 
 
 
