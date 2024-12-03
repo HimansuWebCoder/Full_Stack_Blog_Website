@@ -82,7 +82,7 @@ function isAuthenticated(req, res, next) {
 
 
 // GET Users All Blog Posts
-app.get('/api/posts', (req, res) => {
+app.get('/api/posts', isAuthenticated, (req, res) => {
    db('blog_posts')
        .select("*")
        .then(posts => {
@@ -104,7 +104,7 @@ app.get('/api/posts', (req, res) => {
 
 
 // GET One User's Blog Post
-app.get('/api/posts/:id', (req, res) => {
+app.get('/api/posts/:id', isAuthenticated, (req, res) => {
 	const { id } = req.params;
 
 	db('blog_posts')
@@ -125,7 +125,7 @@ app.get('/api/posts/:id', (req, res) => {
 })
 
 // POST User Blog
-app.post('/api/posts', (req, res) => {
+app.post('/api/posts', isAuthenticated, (req, res) => {
    const { title, description } = req.body;
 
    if (!title && !description) {
