@@ -25,8 +25,8 @@ const config = {
   port: process.env.PGPORT,
   database: process.env.PGDATABASE,
   password: process.env.PGPASSWORD,
-  ssl: process.env.DB_SSL === 'true' ? {rejectUnauthorized: false} : false,
-  // ssl: { rejectUnauthorized: true }, // for production only
+  // ssl: process.env.DB_SSL === 'true' ? {rejectUnauthorized: false} : false,
+  ssl: { rejectUnauthorized: true }, // for production only
   // ssl: { rejectUnauthorized: false }, // for development only
 }
 

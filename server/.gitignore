@@ -2,3 +2,4 @@ node_modules/
 .env
 
 local_backup.sql
+local_backup_blog.dump
