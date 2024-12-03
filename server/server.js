@@ -8,7 +8,7 @@ const knex = require('knex');
 const app = express();
 require('dotenv').config()
 
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 8080;
 
 // const config = {
 //   host: process.env.DB_HOST,
@@ -25,7 +25,8 @@ const config = {
   port: process.env.PGPORT,
   database: process.env.PGDATABASE,
   password: process.env.PGPASSWORD,
-  ssl: { rejectUnauthorized: true }, // Required for Azure
+  ssl: { rejectUnauthorized: true }, // for production only
+  // ssl: { rejectUnauthorized: false }, // for development only
 }
 
 // DATABASE Config
@@ -47,7 +48,7 @@ app.test("trust proxy", 1);
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
-  saveUninitialized: false,
+  saveUninitialized: true,
   cookie: {secure: true, maxAge: 24 * 60 * 60 * 1000}
 }))
 
