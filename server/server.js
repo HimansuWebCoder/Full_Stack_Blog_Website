@@ -25,7 +25,8 @@ const config = {
   port: process.env.PGPORT,
   database: process.env.PGDATABASE,
   password: process.env.PGPASSWORD,
-  ssl: { rejectUnauthorized: true }, // for production only
+  ssl: process.env.DB_SSL === 'true' ? {rejectUnauthorized: false} : false,
+  // ssl: { rejectUnauthorized: true }, // for production only
   // ssl: { rejectUnauthorized: false }, // for development only
 }
 
@@ -160,12 +161,12 @@ app.post('/signup', (req, res) => {
      	return res.status(201).json({message: "User Signup successfully!"});
      })
      .catch(error => {
-     	console.error(`Database Error Occurred: ${error.message}`);
+     	console.error(`Database Error Occurred: ${error}`);
         console.error(`Error Message: ${error.message}`); // Main error message
         console.error(`Error Code: ${error.code}`);       // Database-specific error code
         console.error(`Error Detail: ${error.detail}`);   // Additional info from Postgres
         console.error(`Error Hint: ${error.hint}`);
-     	return res.status(400).json({Error: `Internal Server Error: ${error.message}`});
+     	return res.status(400).json({Error: `Internal Server Error: ${error}`});
      })
 })
 
@@ -184,12 +185,12 @@ app.post('/login', (req, res) => {
      	return res.status(200).json({message: "User Login Successfully!"});
      })
      .catch(error => {
-     	console.error(`Database Error Occurred: ${error.message}`);
+     	console.error(`Database Error Occurred: ${error}`);
         console.error(`Error Message: ${error.message}`); // Main error message
         console.error(`Error Code: ${error.code}`);       // Database-specific error code
         console.error(`Error Detail: ${error.detail}`);   // Additional info from Postgres
         console.error(`Error Hint: ${error.hint}`);
-     	return res.status(400).json({Error: `Internal Server Error: ${error.message}`});
+     	return res.status(400).json({Error: `Internal Server Error: ${error}`});
      })
 
 })
