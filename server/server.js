@@ -160,7 +160,7 @@ app.post('/signup', (req, res) => {
      	return res.status(201).json({message: "User Signup successfully!"});
      })
      .catch(error => {
-     	console.error(`Database Error Occurred: ${error}`);
+     	console.error(`Database Error Occurred: ${error.message}`);
         console.error(`Error Message: ${error.message}`); // Main error message
         console.error(`Error Code: ${error.code}`);       // Database-specific error code
         console.error(`Error Detail: ${error.detail}`);   // Additional info from Postgres
@@ -184,7 +184,7 @@ app.post('/login', (req, res) => {
      	return res.status(200).json({message: "User Login Successfully!"});
      })
      .catch(error => {
-     	console.error(`Database Error Occurred: ${error}`);
+     	console.error(`Database Error Occurred: ${error.message}`);
         console.error(`Error Message: ${error.message}`); // Main error message
         console.error(`Error Code: ${error.code}`);       // Database-specific error code
         console.error(`Error Detail: ${error.detail}`);   // Additional info from Postgres
