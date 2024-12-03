@@ -35,21 +35,21 @@ const db = knex({
 })
 
 // Session Middleware for development only
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: false,
-  cookie: {secure: false, maxAge: 24 * 60 * 60 * 1000}
-}))
-
-// Session Middleware for production only
-// app.test("trust proxy", 1);
 // app.use(session({
 //   secret: process.env.SESSION_SECRET,
 //   resave: false,
-//   saveUninitialized: true,
-//   cookie: {secure: true, maxAge: 24 * 60 * 60 * 1000}
+//   saveUninitialized: false,
+//   cookie: {secure: false, maxAge: 24 * 60 * 60 * 1000}
 // }))
+
+// Session Middleware for production only
+app.test("trust proxy", 1);
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true,
+  cookie: {secure: true, maxAge: 24 * 60 * 60 * 1000}
+}))
 
 // Other Middlewares
 app.use(express.json());
