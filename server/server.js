@@ -8,7 +8,7 @@ const knex = require('knex');
 const app = express();
 require('dotenv').config()
 
-const PORT = process.env.PORT || 8080; // azure port or 8080 for local development
+const PORT = process.env.PORT || 8080;
 
 // const config = {
 //   host: process.env.DB_HOST,
