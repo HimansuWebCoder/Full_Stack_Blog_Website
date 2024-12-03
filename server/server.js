@@ -165,7 +165,7 @@ app.post('/signup', (req, res) => {
         console.error(`Error Code: ${error.code}`);       // Database-specific error code
         console.error(`Error Detail: ${error.detail}`);   // Additional info from Postgres
         console.error(`Error Hint: ${error.hint}`);
-     	return res.status(400).json({Error: `Internal Server Error: ${error}`});
+     	return res.status(400).json({Error: `Internal Server Error: ${error.message}`});
      })
 })
 
@@ -189,7 +189,7 @@ app.post('/login', (req, res) => {
         console.error(`Error Code: ${error.code}`);       // Database-specific error code
         console.error(`Error Detail: ${error.detail}`);   // Additional info from Postgres
         console.error(`Error Hint: ${error.hint}`);
-     	return res.status(400).json({Error: `Internal Server Error: ${error}`});
+     	return res.status(400).json({Error: `Internal Server Error: ${error.message}`});
      })
 
 })
