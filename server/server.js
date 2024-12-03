@@ -54,16 +54,17 @@ app.use(session({
 // Other Middlewares
 app.use(express.json());
 app.use(cors({
-	origin: ['http://localhost:3000', 'myblog-c3hkf4cgcee6bga7.israelcentral-01.azurewebsites.net'],
+	origin: ['http://localhost:3000', 'https://blog-app-frontend-gjg4grgyddbpb5f4.israelcentral-01.azurewebsites.net'],
 	credentials: true,
 }));
 
+app.use(express.static(path.join(__dirname, '../client/build')));
+
 app.get("/*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../client/build/index.html"));
+  res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
 
 
-app.use(express.static(path.join(__dirname, '../client/build')));
 
 // Check user is logged-in or not
 function isAuthenticated(req, res, next) {
