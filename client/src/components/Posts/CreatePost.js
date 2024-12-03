@@ -18,7 +18,7 @@ function CreatePost() {
 	const postHandler = async (e) => {
 		e.preventDefault(); 
 		try {
-            const res = await fetch('http://localhost:8000/api/posts', {
+            const res = await fetch('https://blog-app-backend-epcqfqfmd6bed7a0.israelcentral-01.azurewebsites.net/api/posts', {
             	method: "post",
             	headers: {"Content-Type": "application/json"},
             	body: JSON.stringify({title: title, description: description}),
