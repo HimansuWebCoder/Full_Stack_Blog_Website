@@ -34,7 +34,7 @@
 
 ## Demo
 
-**Live Demo:** [Project Live Link](https://profile-store-frontend.vercel.app)
+**Live Demo:** [Project Live Link](https://blog-app-frontend-gjg4grgyddbpb5f4.israelcentral-01.azurewebsites.net)
 
 
 ## Features
