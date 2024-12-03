@@ -92,7 +92,11 @@ app.get('/api/posts', isAuthenticated, (req, res) => {
        	  }
        })
        .catch(error => {
-       	console.error(`Database Error occurred: ${error}`);
+       	console.error(`Database Error occurred: ${error.stack}`);
+	console.error('Error Message:', error.message); // Main error message
+        console.error('Error Code:', error.code);       // Database-specific error code
+        console.error('Error Detail:', error.detail);   // Additional info from Postgres
+        console.error('Error Hint:', error.hint);
        	return res.status(400).json({Error:`Internal Server Error: ${error}`})
        })
 })
