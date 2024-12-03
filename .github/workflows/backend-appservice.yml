@@ -51,5 +51,5 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: myblog
+          app-name: blog-app-backend
           package: ./server
