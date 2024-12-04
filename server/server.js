@@ -60,7 +60,7 @@ const db = knex({
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
-  saveUninitialized: false,
+  saveUninitialized: true,
   cookie: {secure: true, maxAge: 24 * 60 * 60 * 1000}
 }))
 
@@ -169,6 +169,7 @@ app.post('/signup', (req, res) => {
      .then(user => {
      	req.session.email = email;
      	req.session.password = password;
+        console.log("session user email signup", req.session.email)
      	return res.status(201).json({message: "User Signup successfully!"});
      })
      .catch(error => {
