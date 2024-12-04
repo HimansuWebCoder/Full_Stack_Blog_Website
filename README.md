@@ -47,12 +47,12 @@ Follow these steps to set up the project locally:
    Open your browser and navigate to `http://localhost:8080`.
 
 4. **Set Environment Variables**  
-   Create a `.env` file in the root directory and add the following keys:  
+   Create a `.env` file in the root directory or in /server and add the following keys:  
    ```env
    DB_HOST=your-database-host
    DB_USER=your-database-user
    DB_PASSWORD=your-database-password
-   PORT=3000
+   PORT=8080
    ```
 ---
 
@@ -68,7 +68,7 @@ To deploy this project, follow these steps:
    npm run start
    ```
 
-### Deploy on Cloud (Example: Render)
+### Deploy on Cloud (Example: Azure)
 1. Push your repository to GitHub if it isn't already:  
    ```bash
    git add .
