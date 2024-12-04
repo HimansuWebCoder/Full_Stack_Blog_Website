@@ -10,7 +10,7 @@ function Home() {
    useEffect(() => {
    	 const fetchBlogPosts = async() => {
    	 	try {
-		   	 	const res = await fetch('http://localhost:8080/api/posts',{
+		   	 	const res = await fetch('https://blog-app-backend-epcqfqfmd6bed7a0.israelcentral-01.azurewebsites.net/api/posts',{
 		   	 		method: 'get',
 		   	 		credentials: "include"
 		   	 	});

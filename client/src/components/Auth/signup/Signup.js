@@ -23,8 +23,7 @@ function Signup() {
 	const signupHandler = async(e) => {
 		e.preventDefault();
 		try {
-            // const res = await fetch('https://blog-app-backend-epcqfqfmd6bed7a0.israelcentral-01.azurewebsites.net/signup', {
-            const res = await fetch('http://localhost:8080/signup', {
+            const res = await fetch('https://blog-app-backend-epcqfqfmd6bed7a0.israelcentral-01.azurewebsites.net/signup', {
             	method:"post",
             	headers: {"Content-Type": "application/json"},
             	body: JSON.stringify({
