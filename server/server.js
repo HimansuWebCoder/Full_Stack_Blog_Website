@@ -19,15 +19,6 @@ const config = {
   ssl: { rejectUnauthorized: true }, // for production only
 }
 
-// const config = {
-//   host: 'pern-postgres.postgres.database.azure.com',
-//   user: 'psql_user',
-//   port: 5432,
-//   database: 'blog',
-//   password: 'Postgres@9861',
-//   ssl: { rejectUnauthorized: true }, // for production only
-// }
-
 console.log("Azure psql config", config);
 
 // DATABASE Config
