@@ -36,7 +36,7 @@ const config = {
   port: 5432,
   database: 'blog_postgres_jrnv',
   password: 'gBfAcMNrFkXoFkkVY2YKAjCHXLzEjbV9',
-  ssl: { rejectUnauthorized: false }, // for production only
+  ssl: { rejectUnauthorized: true }, // for production only
 }
   // ssl: process.env.DB_SSL === 'true' ? {rejectUnauthorized: false} : false,
   // ssl: { rejectUnauthorized: false }, // for development only
@@ -61,7 +61,7 @@ app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
-  cookie: {secure: false, maxAge: 24 * 60 * 60 * 1000}
+  cookie: {secure: true, maxAge: 24 * 60 * 60 * 1000}
 }))
 
 // Other Middlewares
@@ -81,7 +81,7 @@ app.use(cors({
 
 // Check user is logged-in or not
 function isAuthenticated(req, res, next) {
-	// console.log(req.session.email)
+	console.log("session user email", req.session.email)
     if (process.env.NODE_ENV === "test") {
         next()
     } else if (req.session.email) {
@@ -93,7 +93,7 @@ function isAuthenticated(req, res, next) {
 
 
 // GET Users All Blog Posts
-app.get('/api/posts', (req, res) => {
+app.get('/api/posts', isAuthenticated, (req, res) => {
    db('blog_posts')
        .select("*")
        .then(posts => {
