@@ -10,36 +10,14 @@ require('dotenv').config()
 
 const PORT = process.env.PORT || 8080;
 
-// const config = {
-//   host: process.env.DB_HOST,
-//   port: process.env.DB_PORT,
-//   user: process.env.DB_USER,
-//   password: process.env.DB_PASSWORD,
-//   database: process.env.DB_NAME,
-//   ssl: { rejectUnauthorized: false }, 
-// }
-
-// const config = {
-//   host: process.env.PGHOST,
-//   user: process.env.PGUSER,
-//   port: process.env.PGPORT,
-//   database: process.env.PGDATABASE,
-//   password: process.env.PGPASSWORD,
-//   // ssl: process.env.DB_SSL === 'true' ? {rejectUnauthorized: false} : false,
-//   ssl: { rejectUnauthorized: true }, // for production only
-//   // ssl: { rejectUnauthorized: false }, // for development only
-// }
-
 const config = {
-  host: 'dpg-ct7jfjtumphs73a5nrr0-a.oregon-postgres.render.com',
-  user: 'blog_postgres_jrnv_user',
-  port: 5432,
-  database: 'blog_postgres_jrnv',
-  password: 'gBfAcMNrFkXoFkkVY2YKAjCHXLzEjbV9',
+  host: process.env.PGHOST,
+  user: process.env.PGUSER,
+  port: process.env.PGPORT,
+  database: process.env.PGDATABASE,
+  password: process.env.PGPASSWORD,
   ssl: { rejectUnauthorized: true }, // for production only
 }
-  // ssl: process.env.DB_SSL === 'true' ? {rejectUnauthorized: false} : false,
-  // ssl: { rejectUnauthorized: false }, // for development only
 
 // DATABASE Config
 const db = knex({
@@ -60,8 +38,8 @@ app.set("trust proxy", 1);
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
-  saveUninitialized: true,
-  cookie: {secure: true, maxAge: 24 * 60 * 60 * 1000}
+  saveUninitialized: false,
+  cookie: {secure: false, maxAge: 24 * 60 * 60 * 1000}
 }))
 
 // Other Middlewares
@@ -70,12 +48,6 @@ app.use(cors({
 	origin: ['http://localhost:3000', 'https://blog-app-frontend-gjg4grgyddbpb5f4.israelcentral-01.azurewebsites.net'],
 	credentials: true,
 }));
-
-// app.use(express.static(path.join(__dirname, '../client/build')));
-
-// app.get("/*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "../client/build/index.html"));
-// });
 
 
 
@@ -93,7 +65,7 @@ function isAuthenticated(req, res, next) {
 
 
 // GET Users All Blog Posts
-app.get('/api/posts', isAuthenticated, (req, res) => {
+app.get('/api/posts', (req, res) => {
    db('blog_posts')
        .select("*")
        .then(posts => {
@@ -104,11 +76,7 @@ app.get('/api/posts', isAuthenticated, (req, res) => {
        	  }
        })
        .catch(error => {
-       	console.error(`Database Error occurred: ${error.stack}`);
-	    console.error(`Error Message: ${error.message}`); // Main error message
-        console.error(`Error Code: ${error.code}`);       // Database-specific error code
-        console.error(`Error Detail: ${error.detail}`);   // Additional info from Postgres
-        console.error(`Error Hint: ${error.hint}`);
+       	console.error(`Database Error occurred: ${error}`);
        	return res.status(400).json({Error:`Internal Server Error: ${error}`})
        })
 })
@@ -174,10 +142,6 @@ app.post('/signup', (req, res) => {
      })
      .catch(error => {
      	console.error(`Database Error Occurred: ${error}`);
-        console.error(`Error Message: ${error.message}`); // Main error message
-        console.error(`Error Code: ${error.code}`);       // Database-specific error code
-        console.error(`Error Detail: ${error.detail}`);   // Additional info from Postgres
-        console.error(`Error Hint: ${error.hint}`);
      	return res.status(400).json({Error: `Internal Server Error: ${error}`});
      })
 })
@@ -198,10 +162,6 @@ app.post('/login', (req, res) => {
      })
      .catch(error => {
      	console.error(`Database Error Occurred: ${error}`);
-        console.error(`Error Message: ${error.message}`); // Main error message
-        console.error(`Error Code: ${error.code}`);       // Database-specific error code
-        console.error(`Error Detail: ${error.detail}`);   // Additional info from Postgres
-        console.error(`Error Hint: ${error.hint}`);
      	return res.status(400).json({Error: `Internal Server Error: ${error}`});
      })
 
