@@ -10,23 +10,23 @@ require('dotenv').config()
 
 const PORT = process.env.PORT || 8080;
 
-// const config = {
-//   host: process.env.PGHOST,
-//   user: process.env.PGUSER,
-//   port: process.env.PGPORT,
-//   database: process.env.PGDATABASE,
-//   password: process.env.PGPASSWORD,
-//   ssl: { rejectUnauthorized: true }, // for production only
-// }
-
 const config = {
-  host: 'pern-postgres.postgres.database.azure.com',
-  user: 'psql_user',
-  port: 5432,
-  database: 'blog',
-  password: 'Postgres@9861',
+  host: process.env.AZURE_DB_HOST,
+  user: process.env.AZURE_DB_USER,
+  port: process.env.AZURE_DB_PORT,
+  database: process.env.AZURE_DB_NAME,
+  password: process.env.AZURE_DB_PASSWORD,
   ssl: { rejectUnauthorized: true }, // for production only
 }
+
+// const config = {
+//   host: 'pern-postgres.postgres.database.azure.com',
+//   user: 'psql_user',
+//   port: 5432,
+//   database: 'blog',
+//   password: 'Postgres@9861',
+//   ssl: { rejectUnauthorized: true }, // for production only
+// }
 
 console.log("Azure psql config", config);
 
@@ -76,7 +76,7 @@ function isAuthenticated(req, res, next) {
 
 
 // GET Users All Blog Posts
-app.get('/api/posts', (req, res) => {
+app.get('/api/posts', isAuthenticated, (req, res) => {
    db('blog_posts')
        .select("*")
        .then(posts => {
