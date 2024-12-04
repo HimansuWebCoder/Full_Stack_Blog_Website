@@ -56,7 +56,7 @@ const db = knex({
 // }))
 
 // Session Middleware for production only
-app.test("trust proxy", 1);
+app.set("trust proxy", 1);
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
