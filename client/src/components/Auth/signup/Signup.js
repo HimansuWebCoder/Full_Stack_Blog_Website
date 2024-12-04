@@ -47,11 +47,11 @@ function Signup() {
         <div className="signup-container">
            <div className="signup-sub-container">
            	<form onSubmit={signupHandler} className="signup-form">
-           	<label htmlfor="name">Name</label>
+           	<label htmlFor="name">Name</label>
            	<input className="signup-input-box" type="text" id="name" value={name} onChange={nameHandler} name="name" placeholder="Enter Your Name" /><br/>
-           	<label htmlfor="email">Email</label>
+           	<label htmlFor="email">Email</label>
            		<input id="email" name="email" className="signup-input-box" value={email} onChange={emailHandler} type="text" placeholder="Enter Your Email" /><br/>
-           	<label  htmlfor="password">Password</label>
+           	<label  htmlFor="password">Password</label>
            		<input id="password" name="password" className="signup-input-box" value={password} onChange={passwordHandler} type="text" placeholder="Enter Your Password" />
            		<button id="signup-submit-btn" type="submit">Submit</button>
            	</form>

@@ -8,7 +8,7 @@
 /*Blogpost card container styling*/
 .blogpost-card-container {
 	max-width:100%;
-	height: 150px;
+	height: auto;
 	overflow: hidden;
 	box-shadow: 0.2px 0.2px 2px 1px white;
 	background-color:#222831 ;

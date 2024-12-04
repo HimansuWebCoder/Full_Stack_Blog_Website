@@ -28,6 +28,8 @@ const config = {
   ssl: { rejectUnauthorized: true }, // for production only
 }
 
+console.log("Azure psql config", config);
+
 // DATABASE Config
 const db = knex({
   client: 'pg',
