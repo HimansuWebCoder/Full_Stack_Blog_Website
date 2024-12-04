@@ -69,12 +69,14 @@ Step-by-step guide on how to install and set up the project.
 
     cd Full_Stack_Blog_Website
     
-    Frontend run:
+    Run Frontend Side:
     cd client
+    npm install
     npm start
 
-    Backend run:
+    Run Backend Side:
     cd server
+    npm install
     npm start
 
     ```
