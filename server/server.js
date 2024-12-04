@@ -19,16 +19,27 @@ const PORT = process.env.PORT || 8080;
 //   ssl: { rejectUnauthorized: false }, 
 // }
 
+// const config = {
+//   host: process.env.PGHOST,
+//   user: process.env.PGUSER,
+//   port: process.env.PGPORT,
+//   database: process.env.PGDATABASE,
+//   password: process.env.PGPASSWORD,
+//   // ssl: process.env.DB_SSL === 'true' ? {rejectUnauthorized: false} : false,
+//   ssl: { rejectUnauthorized: true }, // for production only
+//   // ssl: { rejectUnauthorized: false }, // for development only
+// }
+
 const config = {
-  host: process.env.PGHOST,
-  user: process.env.PGUSER,
-  port: process.env.PGPORT,
-  database: process.env.PGDATABASE,
-  password: process.env.PGPASSWORD,
-  // ssl: process.env.DB_SSL === 'true' ? {rejectUnauthorized: false} : false,
+  host: 'dpg-ct7jfjtumphs73a5nrr0-a.oregon-postgres.render.com',
+  user: 'blog_postgres_jrnv_user',
+  port: 5432,
+  database: 'blog_postgres_jrnv',
+  password: 'gBfAcMNrFkXoFkkVY2YKAjCHXLzEjbV9',
   ssl: { rejectUnauthorized: true }, // for production only
-  // ssl: { rejectUnauthorized: false }, // for development only
 }
+  // ssl: process.env.DB_SSL === 'true' ? {rejectUnauthorized: false} : false,
+  // ssl: { rejectUnauthorized: false }, // for development only
 
 // DATABASE Config
 const db = knex({
