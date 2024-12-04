@@ -49,7 +49,7 @@ const db = knex({
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   cookie: {secure: true, maxAge: 24 * 60 * 60 * 1000}
 }))
 
@@ -82,7 +82,7 @@ function isAuthenticated(req, res, next) {
 
 
 // GET Users All Blog Posts
-app.get('/api/posts', isAuthenticated, (req, res) => {
+app.get('/api/posts',isAuthenticated, (req, res) => {
    db('blog_posts')
        .select("*")
        .then(posts => {
