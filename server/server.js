@@ -10,12 +10,21 @@ require('dotenv').config()
 
 const PORT = process.env.PORT || 8080;
 
+// const config = {
+//   host: process.env.PGHOST,
+//   user: process.env.PGUSER,
+//   port: process.env.PGPORT,
+//   database: process.env.PGDATABASE,
+//   password: process.env.PGPASSWORD,
+//   ssl: { rejectUnauthorized: true }, // for production only
+// }
+
 const config = {
-  host: process.env.PGHOST,
-  user: process.env.PGUSER,
-  port: process.env.PGPORT,
-  database: process.env.PGDATABASE,
-  password: process.env.PGPASSWORD,
+  host: 'pern-postgres.postgres.database.azure.com',
+  user: 'psql_user',
+  port: 5432,
+  database: 'blog',
+  password: 'Postgres@9861',
   ssl: { rejectUnauthorized: true }, // for production only
 }
 
